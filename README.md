@@ -1,3 +1,4 @@
+
 # Nairobi House Hunting
 
 A simple platform for discovering rental houses in Nairobi.
@@ -17,3 +18,5 @@ A simple platform for discovering rental houses in Nairobi.
 git clone https://github.com/YOUR_USERNAME/Nairobi-House-Hunting.git
 cd Nairobi-House-Hunting
 open index.html
+=======
+
