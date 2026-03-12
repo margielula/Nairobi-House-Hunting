@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login - House Hunting System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="index.html code/style.css">
 </head>
 <body class="login-body">
 
@@ -10,17 +10,18 @@
 
     <h2>Login</h2>
 
-    <form>
-        <label>Email</label>
-        <input type="email" placeholder="Enter Email" required>
+    <form action="login.php" method="POST">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter Username" required>
 
         <label>Password</label>
-        <input type="password" placeholder="Enter Password" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
 
         <button type="submit">Login</button>
     </form>
 
     <p>Don't have an account? <a href="register.html">Register here</a></p>
+    <p><a href="index.php" style="font-size: 12px;">Go to Dashboard</a></p>
 
 </div>
 
