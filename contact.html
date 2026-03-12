@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us - House Hunting System</title>
+    <link rel="stylesheet" href="index.html code/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.php">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a href="houses.html">View Houses</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+<section class="contact-agent">
+    <h3>Contact an Agent</h3>
+    <form action="contact.php" method="POST">
+        <input type="text" name="name" placeholder="Your Full Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="phone" placeholder="Your Phone Number" required>
+        <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+</body>
+</html>
