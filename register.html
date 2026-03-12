@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Register - House Hunting System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="index.html code/style.css">
 </head>
 <body class="login-body">
 
@@ -10,18 +10,15 @@
 
     <h2>Create Account</h2>
 
-    <form>
-        <label>Full Name</label>
-        <input type="text" placeholder="Enter Full Name" required>
+    <form action="register.php" method="post">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter Username" required>
 
         <label>Email</label>
-        <input type="email" placeholder="Enter Email" required>
+        <input type="email" name="email" placeholder="Enter Email" required>
 
         <label>Password</label>
-        <input type="password" placeholder="Enter Password" required>
-
-        <label>Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
 
         <button type="submit">Register</button>
     </form>
