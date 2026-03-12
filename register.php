@@ -1,28 +1,21 @@
 <?php
-// register.php
-include 'db.php'; // include database connection
+include 'db.php';
 
-if(isset($_POST['register'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    // simple password hash
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$password', 'Member')";
 
-    $sql = "INSERT INTO users (name, email, password) VALUES ('$name','$email','$hashed_password')";
-    if($conn->query($sql) === TRUE){
-        echo "Registration successful!";
+    if ($conn->query($sql) === TRUE) {
+        echo "Account created successfully!";
+        header("Location: login.html");
+        exit();
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $conn->error; // <-- this will show why it failed
     }
+
+    $conn->close();
 }
 ?>
-
-<h2>Register</h2>
-<form method="POST">
-    Name: <input type="text" name="name" required><br><br>
-    Email: <input type="email" name="email" required><br><br>
-    Password: <input type="password" name="password" required><br><br>
-    <input type="submit" name="register" value="Register">
-</form>
