@@ -1,38 +1,66 @@
 <?php
 include 'db.php';
 
-if(isset($_POST['login'])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $_POST['password'];
 
-$email=$_POST['email'];
-$password=$_POST['password'];
+    $sql = "SELECT * FROM users WHERE username='$username'";
+    $result = $conn->query($sql);
 
-$query="SELECT * FROM users WHERE email='$email'";
-$result=mysqli_query($conn,$query);
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $user['role'];
+            if ($user['role'] == 'Admin') {
+                header("Location: dashboard.php");
+            } else {
+                header("Location: index.php");
+            }
+            exit;
+        } else {
+            $error = "Wrong password!";
+        }
+    } else {
+        $error = "User not found!";
+    }
 
-$user=mysqli_fetch_assoc($result);
-
-if($user && password_verify($password,$user['password'])){
-
-if($user['role']=="agent"){
-header("Location: agent/dashboard.php");
-}
-
-if($user['role']=="seeker"){
-header("Location: seeker/dashboard.php");
-}
-
-}else{
-echo "Invalid login";
-}
-
+    $conn->close();
 }
 ?>
 
-<form method="POST">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - House Hunting System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-body">
 
-<input type="email" name="email" placeholder="Email"><br>
-<input type="password" name="password" placeholder="Password"><br>
+<div class="login-container">
 
-<button name="login">Login</button>
+    <h2>Login</h2>
+    
+    <?php if (isset($error)): ?>
+        <p style="color: red;"><?php echo $error; ?></p>
+    <?php endif; ?>
 
-</form>
+    <form action="login.php" method="POST">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter Username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
+    <p><a href="dashboard.php" style="font-size: 12px;">Go to Dashboard</a></p>
+
+</div>
+
+</body>
+</html>
